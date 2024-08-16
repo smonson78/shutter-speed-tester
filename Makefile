@@ -1,7 +1,7 @@
 MCPU=atmega328p
 PROGTYPE=stk500v2
 PROGPORT=/dev/ttyACM0
-PROG_FLAGS=-B 50 -i 50
+PROG_FLAGS=-B 125KHz
 LFUSE=0xE6
 HFUSE=0xDF
 AVRDUDE=avrdude -p $(MCPU) -c $(PROGTYPE) -P $(PROGPORT) $(PROG_FLAGS)
@@ -17,7 +17,7 @@ TARGET=raster
 $(TARGET).hex: $(TARGET).elf
 	avr-objcopy -j .text -j .data -O ihex $^ $@
 
-$(TARGET).elf: main.o serial.o timer1.o timer2.o
+$(TARGET).elf: main.o serial.o timer1.o
 	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^ $(LDLIBS)
 
 flash: $(TARGET).hex

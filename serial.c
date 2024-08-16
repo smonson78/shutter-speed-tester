@@ -1,4 +1,5 @@
 #include <avr/io.h>
+#include <util/delay.h>
 #include <util/delay_basic.h>
 #include <avr/interrupt.h>
 
@@ -49,14 +50,15 @@ void tx_char(unsigned char data)
     {
         // If there's no character already being sent
         tx_idle = 0;
-        cli();
         
         // Re-enable interrupt
+        cli();
         UCSR0B |= _BV(UDRIE0);
 	    
 	    /* Put data into buffer, sends the data */
         UDR0 = data;
         sei();
+
         return;
     }
                 

@@ -3,8 +3,8 @@
 
 #include <stdint.h>
 
-#define RXBUFFER 64
-#define TXBUFFER 16
+#define RXBUFFER 8
+#define TXBUFFER 256
 
 #define FBAUD 57600
 
